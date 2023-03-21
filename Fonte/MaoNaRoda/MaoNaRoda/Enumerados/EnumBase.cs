@@ -6,12 +6,19 @@ namespace MaoNaRoda.Enumerados
     {
         public static string GetDescricao<T>(string enumValue)
         {
-            var descricaoAtributo = typeof(T)
-                                    .GetField(enumValue)
-                                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                                    .FirstOrDefault() as DescriptionAttribute;
+            try
+            {
+                DescriptionAttribute? descricaoAtributo = typeof(T)
+                                                        .GetField(enumValue)
+                                                        .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                                                        .FirstOrDefault() as DescriptionAttribute;
 
-            return descricaoAtributo != null ? descricaoAtributo.Description : enumValue;
+                return descricaoAtributo != null ? descricaoAtributo.Description : enumValue;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Falha ao obter descrição: {ex.Message}");
+            }           
         }
     }
 }

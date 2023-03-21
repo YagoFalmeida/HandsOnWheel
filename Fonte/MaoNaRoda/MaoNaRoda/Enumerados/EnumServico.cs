@@ -19,7 +19,7 @@
             }
             catch (Exception ex)
             {
-                throw new Exception($"Falha ao criar lista de opções baseado: {ex.Message}");
+                throw new Exception($"Falha ao criar lista de opções: {ex.Message}");
             }
         }
     }
